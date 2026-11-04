@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "allpay-games"
+version = "1.0.0"
+description = "Reproducible experiments for infinite-duration all-pay bidding games"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "scipy>=1.11", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pypdf>=5"]
+
+[project.scripts]
+allpay = "allpay.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["allpay*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
