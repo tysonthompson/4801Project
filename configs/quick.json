@@ -1,0 +1,14 @@
+{
+  "seed": 4801,
+  "graphs": ["bowtie", "fork", "cycle"],
+  "mechanisms": ["richman", "poorman"],
+  "ratios": [0.25, 0.5, 0.75],
+  "horizons": [100, 1000],
+  "replicates": 3,
+  "pairs": [["paper-mixed", "paper-mixed"], ["fixed", "fixed"], ["uniform", "uniform"]],
+  "counterstrategies": true,
+  "pure_poorman": true,
+  "epsilon": 0.05,
+  "slack": 0.02,
+  "fraction": 0.02
+}

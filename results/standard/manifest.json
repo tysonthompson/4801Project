@@ -1,0 +1,28 @@
+{
+  "created_utc": "2026-11-04T18:35:16.769647+00:00",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "source_sha256": {
+    "allpay\\__init__.py": "58aa402e1f4f2ea3c40568430686ab46221158acc1921054304c2b51fdfb2a45",
+    "allpay\\__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "allpay\\cli.py": "2ca98d0816cb1a163f872302bb7c50a68e1a5f790306f9e8ca8b5a000517aac4",
+    "allpay\\experiments.py": "743a6502ed64759e6a4b25f46755662f27d822bc5f9b427e7e407f2f8fa48ecf",
+    "allpay\\graph.py": "a0211e8525da08ece4a57b55d10dccd8c1155073e95aa35205c63c59bd1603e2",
+    "allpay\\report.py": "a83c78f5464864637d7383d650add75791327b81f673ed2ed6526e6f111215ad",
+    "allpay\\simulation.py": "1e67b6b5dc666b2f206a0a442678bd4ce6a5cb9ccc682633d825a3a405153e01",
+    "allpay\\strategies.py": "baef857a694fb30d469654cab9cf858ebfea61a6ec950039d391935bd7205008",
+    "allpay\\theory.py": "b49762cb09af93565330bea88b73822c62aa3685fffb28b930140de3ab086d3c"
+  },
+  "config_sha256": "145f964aeb303ab58be38ba5de548eb284c00bdbeaa592175aeb49b8fb8749b0",
+  "failed_runs": 0,
+  "successful_run_prefixes": 10800,
+  "decimal_retries": 72,
+  "tie_rule": "Min wins exact ties",
+  "reward": "source vertex before each move",
+  "budget_units": "common normalized units; natural log tracks physical total"
+}

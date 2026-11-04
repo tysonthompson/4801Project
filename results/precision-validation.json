@@ -1,0 +1,116 @@
+[
+  {
+    "graph": "bowtie",
+    "ratio": 0.75,
+    "runs": [
+      {
+        "precision": 80,
+        "mean_payoff": 0.6427,
+        "max_win_rate": 0.6427,
+        "log_min_budget": -16104.174910104402
+      },
+      {
+        "precision": 120,
+        "mean_payoff": 0.6427,
+        "max_win_rate": 0.6427,
+        "log_min_budget": -16104.174910104402
+      }
+    ],
+    "payoff_difference": 0.0
+  },
+  {
+    "graph": "bowtie",
+    "ratio": 0.9,
+    "runs": [
+      {
+        "precision": 80,
+        "mean_payoff": 0.8712,
+        "max_win_rate": 0.8712,
+        "log_min_budget": -6988.163117935508
+      },
+      {
+        "precision": 120,
+        "mean_payoff": 0.8712,
+        "max_win_rate": 0.8712,
+        "log_min_budget": -6988.163117935508
+      }
+    ],
+    "payoff_difference": 0.0
+  },
+  {
+    "graph": "fork",
+    "ratio": 0.75,
+    "runs": [
+      {
+        "precision": 80,
+        "mean_payoff": 0.5825,
+        "max_win_rate": 0.4008,
+        "log_min_budget": -5268.7265465400815
+      },
+      {
+        "precision": 120,
+        "mean_payoff": 0.5825,
+        "max_win_rate": 0.4008,
+        "log_min_budget": -5268.7265465400815
+      }
+    ],
+    "payoff_difference": 0.0
+  },
+  {
+    "graph": "fork",
+    "ratio": 0.9,
+    "runs": [
+      {
+        "precision": 80,
+        "mean_payoff": 1.0563,
+        "max_win_rate": 0.7013,
+        "log_min_budget": -16283.907190072185
+      },
+      {
+        "precision": 120,
+        "mean_payoff": 1.0563,
+        "max_win_rate": 0.7013,
+        "log_min_budget": -16283.907190072185
+      }
+    ],
+    "payoff_difference": 0.0
+  },
+  {
+    "graph": "random_6_4801",
+    "ratio": 0.75,
+    "runs": [
+      {
+        "precision": 80,
+        "mean_payoff": 2.105,
+        "max_win_rate": 0.5392,
+        "log_min_budget": -18809.846566677577
+      },
+      {
+        "precision": 120,
+        "mean_payoff": 2.105,
+        "max_win_rate": 0.5392,
+        "log_min_budget": -18809.846566677577
+      }
+    ],
+    "payoff_difference": 0.0
+  },
+  {
+    "graph": "random_6_4801",
+    "ratio": 0.9,
+    "runs": [
+      {
+        "precision": 80,
+        "mean_payoff": 2.9114,
+        "max_win_rate": 0.8085,
+        "log_min_budget": -9391.665827070672
+      },
+      {
+        "precision": 120,
+        "mean_payoff": 2.9114,
+        "max_win_rate": 0.8085,
+        "log_min_budget": -9391.665827070672
+      }
+    ],
+    "payoff_difference": 0.0
+  }
+]

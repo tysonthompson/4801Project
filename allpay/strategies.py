@@ -1,9 +1,15 @@
 """Bidders see public pre-round state, never the opponent's sampled bid."""
 from dataclasses import dataclass
+from decimal import Decimal
 import math
 import random
 from .graph import Graph
 from .theory import probability, solve, shift_inverse
+
+
+def money_factor(value, factor):
+    """Multiply monetary values without narrowing high-precision budgets to float."""
+    return value * (Decimal.from_float(factor) if isinstance(value, Decimal) else factor)
 
 
 @dataclass(frozen=True)
@@ -45,14 +51,14 @@ class Baseline(Strategy):
         factor = {"zero": 0.0, "aggressive": 5.0}.get(self.name, 1.0)
         if self.name == "uniform":
             factor = 2 * rng.random()  # same mean spend fraction as fixed
-        return state.budgets[self.player] * min(1.0, self.fraction * factor)
+        return money_factor(state.budgets[self.player], min(1.0, self.fraction * factor))
 
 
 class PaperStrategy(Strategy):
     """Finite-epsilon constructions from Sections 2.4 and 3 of the paper.
 
     Poorman implements Lemma 31's virtual asymmetric budget A=C*B_tilde.
-    A is updated in OLD common units, then renormalized with real budgets.
+    A is updated in OLD common units, multiplied by C'/C, then renormalized.
     It is not reset to B-W*C each turn (that would change the construction).
     """
     def __init__(self, graph, player, mechanism, ratio, kind="mixed", epsilon=0.05, slack=0.02):
@@ -96,27 +102,34 @@ class PaperStrategy(Strategy):
         if own == 0:
             return 0.0
         if other == 0:
-            return own * self.alpha  # legal positive bid beats a bankrupt opponent
+            return money_factor(own, self.alpha)  # beats a genuinely bankrupt opponent
         if self.mechanism == "richman":
-            return rng.random() * self.alpha * own * s
+            return money_factor(own, rng.random() * self.alpha * s)
         if self.kind == "pure":
             if self.W <= 1:
                 return 0.0
-            return self.alpha * self.virtual * s / max(1.0, self.W - 1)
-        cap = self.alpha * self.virtual * s / max(1.0, self.W)
-        threshold = 2 * max(1.0, self.W) * other
+            return money_factor(self.virtual, self.alpha * s / max(1.0, self.W - 1))
+        cap = money_factor(self.virtual, self.alpha * s / max(1.0, self.W))
+        threshold = money_factor(other, 2 * max(1.0, self.W))
         if cap > threshold:
             return cap / 2
         if self.W <= 1 and rng.random() >= self.W - self.epsilon:
             return 0.0
-        return rng.random() * cap
+        return money_factor(cap, rng.random())
 
     def observe(self, state, bids, scale):
         if self.mechanism == "poorman":
-            updated = math.fsum((self.virtual, -bids[self.player], self.W * bids[1 - self.player]))
+            terms = (self.virtual, -bids[self.player], money_factor(bids[1 - self.player], self.W))
+            updated = sum(terms) if isinstance(self.virtual, Decimal) else math.fsum(terms)
             if updated < -1e-14 or not math.isfinite(updated):
                 raise FloatingPointError("Virtual budget invariant failed")
-            self.virtual = max(0.0, updated) / scale if scale else 0.0
+            other = state.budgets[1 - self.player]
+            # A'=C'*B_tilde' = (C'/C)*(A-x+W*y), then change common units.
+            # Omitting C'/C would silently reset A to the real reserve B-W*C.
+            retention = (other - bids[1 - self.player]) / other if other else other * 0
+            self.virtual = max(0.0, updated) * retention / scale if scale else 0.0
+            if updated > 0 and retention > 0 and self.virtual == 0:
+                raise FloatingPointError("Virtual budget underflow")
 
 
 class PredictableCounter(Strategy):
